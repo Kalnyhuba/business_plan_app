@@ -1,0 +1,19 @@
+review_business_plan:
+  description: >
+    Review the given business plan in the following way:
+    - Ensure that the business plan is coherent and the text is structured
+    - Ensure that the output does not contain explicit guesses or assumptions, for example in contexts where the user has not provided information, it should not contain expressions like "it is likely that" or "it is possible that"
+    - Ensure that the business plan does not provide suggestions for improvements, but only states facts
+    - Ensure that the business plan is well written and that the language is professional and engaging
+
+    Provide actionable changes about what is wrong and what actions need to be taken to fix the business plan, if any.
+    Your final response should include:
+    Feedback: feedback points for the business plan
+    Actionable changes: changes that need to be made to the business plan
+
+    The plan to review is:
+    {business_plan}
+  expected_output: >
+    Feedback: feedback points for the business plan
+    Actionable changes: changes that need to be made to the business plan
+  agent: business_plan_reviewer

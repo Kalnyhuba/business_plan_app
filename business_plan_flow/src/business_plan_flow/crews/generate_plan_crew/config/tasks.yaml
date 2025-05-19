@@ -1,0 +1,62 @@
+create_business_concept:
+  description: >
+    Your task is to generate a clear, professional, and well-structured Company Summary section for a business plan. This section should give a high-level overview of the company based on user-provided information.
+    First, reason step by step to ensure no detail is missed. Follow these stages while writing your final report:
+    1. Consider the values of the following variables provided by the user from a questionnaire, but do not use them directly, use them as information and context:
+    - Business Name: {business_name}
+    - Establishment Year: {start_year}
+    - The reason for establishing the company: {business_reason}
+    - Mission: {mission_vision}
+    - Legal Structure: {legal_structure}
+    - Financial Funding of the company: {financial_funding}
+    - Business Sector the company operates in: {business_sector}
+    - Products or services offered by the company: {product_service_description}
+    2. Break down the company summary into the following required components:
+    - Brief introduction of the business (name, starting year, reason for establishing the company etc.)
+    - Mission
+    - Company objectives based on the information and context
+    - Company structure (legal structure, financial funding etc.)
+    - Products and services offered
+    - Business sector and its characteristics
+    3. Plan the content for each section using bullet points.
+    4. Then, generate the full professional narrative based on the structured points above. Do not include the bullet points in the final output. Write clearly, concisely, and formally, and do not include the reasoning steps in the final output.
+    Do not make up any data or information, base your report on the information provided by the user in the variables.
+    Remember: this section is an overview and should not go into deep operational or financial details.
+    If the reviewer provides feedback, and it contains relevant feedback to your parts, use it to improve the report. The feedback is: {feedback}
+  expected_output: >
+    A detailed markdown report, which consists of at least 1200 characters and consists of the following things in this order:
+    - Brief introduction of the business (name, starting year, reason for establishing the company etc.)
+    - Mission
+    - Company objectives based on the information and context
+    - Company structure (legal structure, financial funding etc.)
+    - Products and services offered
+    - Business sector and its characteristics
+  agent: business_designer
+
+create_product_design:
+  description: >
+    Your task is to write a detailed and professional Product or Service Description that explains what the company offers and how it creates value for its customers.
+    First, reason step by step to ensure no detail is missed. Follow these stages while writing your final report:
+    1. Consider the values of the following variables provided by the user from a questionnaire, but do not use them directly, use them as information and context:
+    Products or services offered by the company: {product_service_description}
+    Whether the product or service is centralised or decentralised: {product_centralisation}
+    What is the range of the product or service: {product_range}
+    What characterizes the end consumer of the product or service: {end_consumer_characteristics}
+    What types of end consumers are there: {end_consumer_characteristics_2}
+    Values proposed to the end consumers: {value_propositions}
+    2. Break down the product or service description into the following required components:
+    - Product/Service description in detail: What the company provides, including product or service type and whether it's centralized or decentralized.
+    - Key features and functionalities: Main characteristics of the product or service and what makes it valuable or unique.
+    - End consumer description: Who the product or service is for, including their characteristics and types.
+    - Value propositions: What value is delivered to the end consumers and how it addresses their needs or expectations.
+    3. Plan the content for each section using bullet points.
+    4. Then, generate the full professional narrative based on the structured points above. Do not include the bullet points in the final output. Write clearly, concisely, and formally, and do not include the reasoning steps in the final output.
+    Do not make up any data or information, base your report on the information provided by the user in the variables. You can use the information from the previous agent as context.
+    If the reviewer provides feedback, and it contains relevant feedback to your parts, use it to improve the report. The feedback is: {feedback}
+  expected_output: >
+    A detailed markdown report, which consists of at least 1800 characters and consists of the following things in this order:
+    - Product/Service description in detail
+    - Key features and functionalities
+    - End consumer description
+    - Value propositions
+  agent: product_designer
