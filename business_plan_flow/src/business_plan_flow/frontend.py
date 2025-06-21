@@ -118,6 +118,35 @@ if 'similar_products_switch' not in st.session_state:
     st.session_state.similar_products_switch = None
 if 'general_customer_relation' not in st.session_state:
     st.session_state.general_customer_relation = None
+# Page 3 session state initialization
+if 'material_resources' not in st.session_state:
+    st.session_state.material_resources = []
+if 'intangible_resources' not in st.session_state:
+    st.session_state.intangible_resources = []
+if 'important_activities' not in st.session_state:
+    st.session_state.important_activities = []
+if 'inhouse_activities' not in st.session_state:
+    st.session_state.inhouse_activities = []
+if 'outsourced_activities' not in st.session_state:
+    st.session_state.outsourced_activities = []
+if 'company_statements' not in st.session_state:
+    st.session_state.company_statements = []
+if 'important_strategic_partners' not in st.session_state:
+    st.session_state.important_strategic_partners = []
+if 'partnership_benefits' not in st.session_state:
+    st.session_state.partnership_benefits = []
+if 'other_benefit' not in st.session_state:
+    st.session_state.other_benefit = None
+if 'company_dependency' not in st.session_state:
+    st.session_state.company_dependency = None
+if 'cost_intensive_components' not in st.session_state:
+    st.session_state.cost_intensive_components = []
+if 'team_members' not in st.session_state:
+    st.session_state.team_members = []
+if 'funding_amount' not in st.session_state:
+    st.session_state.funding_amount = None
+if 'funding_purpose' not in st.session_state:
+    st.session_state.funding_purpose = ""
 
 st.title("Business Plan Creator")
 
@@ -245,91 +274,97 @@ if st.session_state.page == 1:
             "What type of raw materials business is your company?",
             options=[
                 "Mining",
+                "Textiles and clothing",
+                "Paper and carton",
+                "Chemicals",
+                "Petroleum",
+                "Rubber",
+                "Glass & Ceramics",
+                "Oil",
                 "Steel",
-                "Trading companies",
-                "Other"
+                "Non-ferrous metals",
+                "Retailers"
             ],
             index=None if st.session_state.raw_materials_type is None else [
                 "Mining",
+                "Textiles and clothing",
+                "Paper and carton",
+                "Chemicals",
+                "Petroleum",
+                "Rubber",
+                "Glass & Ceramics",
+                "Oil",
                 "Steel",
-                "Trading companies",
-                "Other"
+                "Non-ferrous metals",
+                "Retailers"
             ].index(st.session_state.raw_materials_type)
         )
     elif st.session_state.business_sector == "Industrial business (e.g. means of production, transport)":
         st.session_state.industrial_business_type = st.radio(
             "What type of industrial business is your company?",
             options=[
-                "Means of production",
-                "Transport",
-                "Other"
+                "Production equipment (including construction, machinery, shipbuilding, transportation equipment, and other forms of production)",
+                "Transport (including rail & bus, land transport, sea transport, air transport, and warehousing)"
             ],
             index=None if st.session_state.industrial_business_type is None else [
-                "Means of production",
-                "Transport",
-                "Other"
+                "Production equipment (including construction, machinery, shipbuilding, transportation equipment, and other forms of production)",
+                "Transport (including rail & bus, land transport, sea transport, air transport, and warehousing)"
             ].index(st.session_state.industrial_business_type)
         )
     elif st.session_state.business_sector == "Services (e.g. commercial and professional services, tourism)":
         st.session_state.services_type = st.radio(
             "What type of services does your company provide?",
             options=[
-                "Commercial services",
-                "Professional services",
-                "Tourism",
-                "Other"
+                "Commercial and professional services (e.g. architecture, consulting, and tradespeople)",
+                "Childcare and education (e.g. schools and nurseries)",
+                "Tourism (e.g., hotels, restaurant, and leisure)"
             ],
             index=None if st.session_state.services_type is None else [
-                "Commercial services",
-                "Professional services",
-                "Tourism",
-                "Other"
+                "Commercial and professional services (e.g. architecture, consulting, and tradespeople)",
+                "Childcare and education (e.g. schools and nurseries)",
+                "Tourism (e.g., hotels, restaurant, and leisure)"
             ].index(st.session_state.services_type)
         )
     elif st.session_state.business_sector == "Durable consumer goods (e.g., furniture, clothing, retail)":
         st.session_state.durable_goods_type = st.radio(
             "What type of durable consumer goods does your company deal with?",
             options=[
-                "Furniture",
-                "Clothing",
-                "Retail",
-                "Other"
+                "Automobiles & Components",
+                "Consumer goods and & apparel (e.g., electronics, furniture, clothing)",
+                "Media (e.g., multimedia and film)",
+                "Retail"
             ],
             index=None if st.session_state.durable_goods_type is None else [
-                "Furniture",
-                "Clothing",
-                "Retail",
-                "Other"
+                "Automobiles & Components",
+                "Consumer goods and & apparel (e.g., electronics, furniture, clothing)",
+                "Media (e.g., multimedia and film)",
+                "Retail"
             ].index(st.session_state.durable_goods_type)
         )
     elif st.session_state.business_sector == "Fast-moving consumer goods (e.g., food, beverages, personal products)":
         st.session_state.consumer_goods_type = st.radio(
             "What type of consumer goods does your company deal with?",
             options=[
-                "Food",
-                "Beverages",
-                "Personal products",
-                "Other"
+                "Retailer of basic consumer goods",
+                "Manufacturer of food, beverages & tobacco (e.g., fishing and agriculture)",
+                "Producer of household & personal products"
             ],
             index=None if st.session_state.consumer_goods_type is None else [
-                "Food",
-                "Beverages",
-                "Personal products",
-                "Other"
+                "Retailer of basic consumer goods",
+                "Manufacturer of food, beverages & tobacco (e.g., fishing and agriculture)",
+                "Producer of household & personal products"
             ].index(st.session_state.consumer_goods_type)
         )
     elif st.session_state.business_sector == "Healthcare (e.g., healthcare equipment, pharmaceuticals)":
         st.session_state.healthcare_type = st.radio(
             "What type of healthcare business is your company?",
             options=[
-                "Healthcare equipment",
-                "Pharmaceuticals",
-                "Other"
+                "Healthcare equipment and service",
+                "Pharmaceuticals and biotechnology"
             ],
             index=None if st.session_state.healthcare_type is None else [
-                "Healthcare equipment",
-                "Pharmaceuticals",
-                "Other"
+                "Healthcare equipment and service",
+                "Pharmaceuticals and biotechnology"
             ].index(st.session_state.healthcare_type)
         )
     elif st.session_state.business_sector == "Financial sectors (e.g., banks, insurance)":
@@ -338,58 +373,56 @@ if st.session_state.page == 1:
             options=[
                 "Banking",
                 "Insurance",
-                "Other"
+                "Pension funds"
             ],
             index=None if st.session_state.financial_sector_type is None else [
                 "Banking",
                 "Insurance",
-                "Other"
+                "Pension funds"
             ].index(st.session_state.financial_sector_type)
         )
     elif st.session_state.business_sector == "Information technology":
         st.session_state.it_sector_type = st.radio(
             "What type of IT business is your company?",
             options=[
-                "Software development",
-                "Hardware",
-                "IT services",
-                "Other"
+                "Software & service",
+                "Technology, hardware & equipment"
             ],
             index=None if st.session_state.it_sector_type is None else [
                 "Software development",
-                "Hardware",
-                "IT services",
-                "Other"
+                "Hardware"
             ].index(st.session_state.it_sector_type)
         )
     elif st.session_state.business_sector == "Utilities and energy (e.g., water, heat, recycling)":
         st.session_state.utilities_type = st.radio(
             "What type of utilities business is your company?",
             options=[
+                "Electricity",
+                "Gas",
                 "Water",
                 "Heat",
-                "Recycling",
-                "Other"
+                "Recycing/energy optimization"
             ],
             index=None if st.session_state.utilities_type is None else [
+                "Electricity",
+                "Gas",
                 "Water",
                 "Heat",
-                "Recycling",
-                "Other"
+                "Recycling/energy optimization"
             ].index(st.session_state.utilities_type)
         )
     elif st.session_state.business_sector == "Culture and leisure (e.g., cultural centre, cinema)":
         st.session_state.culture_type = st.radio(
             "What type of culture and leisure business is your company?",
             options=[
-                "Cultural centre",
-                "Cinema",
-                "Other"
+                "Cultural (e.g., theater, museum, culture center)",
+                "Sport & training (e.g., sportsclubs and fitness centers)",
+                "Entertainment (e.g., cinema, amusement park)"
             ],
             index=None if st.session_state.culture_type is None else [
-                "Cultural centre",
-                "Cinema",
-                "Other"
+                "Cultural (e.g., theater, museum, culture center)",
+                "Sport & training (e.g., sportsclubs and fitness centers)",
+                "Entertainment (e.g., cinema, amusement park)"
             ].index(st.session_state.culture_type)
         )
 
@@ -885,101 +918,354 @@ if st.session_state.page == 2:
     )
 
     # Add continue button
-    #if st.button("Continue to Next Section"):
-    #    st.session_state.page = 3
-    #    st.rerun()
+    if st.button("Continue to Next Section"):
+        st.session_state.page = 3
+        st.rerun()
 
-if st.button("Generate Business Plan"):
-    with st.spinner("🧠 Generating your business plan..."):
-        try:
-            data = {
-                "business_name": st.session_state.business_name,
-                    "start_year": st.session_state.start_year,
-                    "business_reason": st.session_state.business_reason,
-                    "mission_vision": st.session_state.mission_vision,
-                    "legal_structure": st.session_state.legal_structure,
-                    "financial_funding": st.session_state.financial_funding,
-                    "business_sector": st.session_state.business_sector,
-                    "raw_materials_type": st.session_state.raw_materials_type,
-                    "industrial_business_type": st.session_state.industrial_business_type,
-                    "services_type": st.session_state.services_type,
-                    "durable_goods_type": st.session_state.durable_goods_type,
-                    "consumer_goods_type": st.session_state.consumer_goods_type,
-                    "healthcare_type": st.session_state.healthcare_type,
-                    "financial_sector_type": st.session_state.financial_sector_type,
-                    "it_sector_type": st.session_state.it_sector_type,
-                    "utilities_type": st.session_state.utilities_type,
-                    "culture_type": st.session_state.culture_type,
-                    "primary_countries": st.session_state.primary_countries,
-                    "product_centralisation": st.session_state.product_centralisation,
-                    "product_range": st.session_state.product_range,
-                    "end_consumer_characteristics": st.session_state.end_consumer_characteristics,
-                    "end_consumer_characteristics_2": st.session_state.end_consumer_characteristics_2,
-                    "product_service_description": st.session_state.product_service_description,
-                    "segment_name": st.session_state.segment_name,
-                    "segment_demographics": st.session_state.segment_demographics,
-                    "segment_characteristics": st.session_state.segment_characteristics,
-                    "customer_count": st.session_state.customer_count,
-                    "problems_faced": st.session_state.problems_faced,
-                    "biggest_competitors": st.session_state.biggest_competitors,
-                    "competition_intensity": st.session_state.competition_intensity,
-                    "price_comparison": st.session_state.price_comparison,
-                    "market_type": st.session_state.market_type,
-                    "competitive_parameters": st.session_state.competitive_parameters,
-                    "value_propositions": st.session_state.value_propositions,
-                    "direct_income": st.session_state.direct_income,
-                    "primary_revenue": st.session_state.primary_revenue,
-                    "one_time_payments": st.session_state.one_time_payments,
-                    "ongoing_payments": st.session_state.ongoing_payments,
-                    "payment_characteristics": st.session_state.payment_characteristics,
-                    "package_price": st.session_state.package_price,
-                    "price_negotiation": st.session_state.price_negotiation,
-                    "fixed_prices": st.session_state.fixed_prices,
-                    "dynamic_prices": st.session_state.dynamic_prices,
-                    "distribution_channels": st.session_state.distribution_channels,
-                    "purchasing_power": st.session_state.purchasing_power,
-                    "product_related_characteristics": st.session_state.product_related_characteristics,
-                    "self_service_availability": st.session_state.self_service_availability,
-                    "online_communities_presence": st.session_state.online_communities_presence,
-                    "development_process_customer_involvement": st.session_state.development_process_customer_involvement,
-                    "after_sale_purchases": st.session_state.after_sale_purchases,
-                    "personal_assistance_offered": st.session_state.personal_assistance_offered,
-                    "similar_products_switch": st.session_state.similar_products_switch,
-                    "general_customer_relation": st.session_state.general_customer_relation
-            }
+if st.session_state.page == 3:
+    st.header("Part 3: Key resources, technologies, green initiatives, team structure and funding")
+    st.write("We still look at your company from the inside out and would like to gain insight into the key resources for creating and capturing value.")
 
-            st.write("🔄 Sending data for processing...")
+    st.session_state.material_resources = st.multiselect(
+        "Now, please select the three most important material resources for your company to create/deliver value to customers:",
+        options=[
+            "Liquid funds",
+            "Financial guarantees",
+            "Inventory",
+            "Location",
+            "Logistic infrastructure",
+            "Manufacturing/production facilities",
+            "Own physical stores/shops",
+            "Means of transport",
+            "Technologies"
+        ],
+        default=st.session_state.material_resources,
+        max_selections=3,
+        help="You must select exactly three resources"
+    )
 
-            response = requests.post(
-                "http://localhost:8000/generate_business_plan",
-                json=data
-            )
+    st.session_state.intangible_resources = st.multiselect(
+        "Please select the three most important intangible resources that your company can use to create/deliver value to customers:",
+        options=[
+            "Brand(s)",
+            "Customer relations",
+            "Distribution network",
+            "Knowledge/know-how",
+            "Image and reputation",
+            "Digital technologies (e.g. information systems, web platform and software)",
+            "Intellectual property (eg patents, copyrights and trademarks)",
+            "Partnerships (e.g. with suppliers, customers or competitors in connection with license agreements, joint ventures, franchises)",
+            "Human resources"
+        ],
+        default=st.session_state.intangible_resources,
+        max_selections=3,
+        help="You must select exactly three resources"
+    )
 
-            if response.status_code == 200:
-                result = response.json()
-                business_plan_sections = result["business_plan"]
+    st.write("Let's continue by ranking your company's most important activities in terms of creating/delivering value to customers.")
+    
+    st.session_state.important_activities = st.multiselect(
+        "Please select the three most important activities for your company to create/deliver value to customers:",
+        options=[
+            "Administration, finance and management/control",
+            "Building and maintaining customer relationships",
+            "Building and maintaining partnerships",
+            "Follow-up sales and service activities (in relation to the sale of the company's own products)",
+            "Competence development",
+            "Recruitment and retention of employees",
+            "Inbound logistics (Material resources)",
+            "Outbound logistics (Material resources)",
+            "IT management",
+            "Marketing",
+            "Sales",
+            "Counselling in relation to customers' unique challenges",
+            "Procurement (Material resources)",
+            "Production of physical products",
+            "Production and delivery of services",
+            "Project Management",
+            "R&D (research and development)"
+        ],
+        max_selections=3,
+        help="You must select exactly three activities"
+    )
 
-                # Display each section with progress bar
-                progress = st.progress(0)
-                full_content = "# Business Plan\n\n"
-                num_sections = len(business_plan_sections)
+    st.session_state.inhouse_activities = st.multiselect(
+        "Please select all of the activities that are performed in-house:",
+        options=[
+            "Administration, finance and management/control",
+            "Building and maintaining customer relationships",
+            "Building and maintaining partnerships",
+            "Follow-up sales and service activities (in relation to the sale of the company's own products)",
+            "Competence development",
+            "Recruitment and retention of employees",
+            "Inbound logistics (Material resources)",
+            "Outbound logistics (Material resources)",
+            "IT management",
+            "Marketing",
+            "Sales",
+            "Counselling in relation to customers' unique challenges",
+            "Procurement (Material resources)",
+            "Production of physical products",
+            "Production and delivery of services",
+            "Project Management",
+            "R&D (research and development)",
+            "None of the above"
+        ],
+        default=st.session_state.inhouse_activities
+    )
 
-                for i, section in enumerate(business_plan_sections):
-                    st.markdown(section, unsafe_allow_html=True)
-                    st.markdown("---")
-                    full_content += section + "\n\n---\n\n"
-                    progress.progress((i + 1) / num_sections)
+    st.session_state.outsourced_activities = st.multiselect(
+        "Please select all of the activities that are outsourced:",
+        options=[
+            "Administration, finance and management/control",
+            "Building and maintaining customer relationships",
+            "Building and maintaining partnerships",
+            "Follow-up sales and service activities (in relation to the sale of the company's own products)",
+            "Competence development",
+            "Recruitment and retention of employees",
+            "Inbound logistics (Material resources)",
+            "Outbound logistics (Material resources)",
+            "IT management",
+            "Marketing",
+            "Sales",
+            "Counselling in relation to customers' unique challenges",
+            "Procurement (Material resources)",
+            "Production of physical products",
+            "Production and delivery of services",
+            "Project Management",
+            "R&D (research and development)",
+            "None of the above"
+        ],
+        default=st.session_state.outsourced_activities
+    )
+    
+    st.header("Strategic Partners")
+    st.write("These were the questions regarding your company's resources and activities. Now we are investigating if your company has strategic partnerships.")
 
-                st.success("✅ Business Plan ready!")
+    st.session_state.company_statements = st.multiselect(
+        "Please indicate if any of the following statements apply to your company:",
+        options=[
+            "Your company utilizes crowdfunding",
+            "Other companies sell your company's products under their own brand (white label)",
+            "Your company has customer club partners"
+        ],
+        help="Select all statements that apply to your company"
+    )
 
-                st.download_button(
-                    label="Download Business Plan",
-                    data=full_content,
-                    file_name="generated_business_plan.md",
-                    mime="text/markdown"
+    st.session_state.important_strategic_partners = st.multiselect(
+        "Please select the three most important strategic partners of your company to create/deliver value to customers:",
+        options=[
+            "Communities",
+            "Shareholders",
+            "Distribution partners",
+            "Marketing Partners",
+            "Intermediaries (banks, stockbrokers, insurance companies)",
+            "Vendors",
+            "Customers (close cooperation with individual customers, e.g. contract-based, co-development)",
+            "Government/Region/Municipality",
+            "Competitors",
+            "Research and development partners",
+            "Sales Partners",
+            "Franchisees"
+        ],
+        max_selections=3,
+        help="You need to select up to three partners"
+    )
+
+    st.session_state.partnership_benefits = st.multiselect(
+        "Which of the following benefits does your company derive from cooperation with its three main partners?",
+        options=[
+            "Cost reduction (e.g. economies of scale, up-selling, raw material cost reduction, sharing common infrastructure)",
+            "Reducing risk",
+            "Access to important information (e.g. market knowledge, research and development, legislation)",
+            "Outsourcing of activities (e.g. business partners sell/deliver products/services to our customers)",
+            "Increases bargaining power",
+            "Access to special customer segments",
+            "Access to critical resources",
+            "Funding/Financing",
+            "Other"
+        ],
+        max_selections=3,
+        help="Select up to three benefits"
+    )
+
+    # Show text input if "Other" is selected
+    st.session_state.other_benefit = None
+    if "Other" in st.session_state.partnership_benefits:
+        st.session_state.other_benefit = st.text_input(
+            "Please specify the other benefit:",
+            placeholder="Enter the benefit"
+        )
+
+    st.session_state.company_dependency = st.radio(
+        "How dependent is your company on its collaboration with a specific company?",
+        options=["Not Dependent", "Somewhat Dependent", "Dependent", "Highly Dependent", "Completely Dependent"],
+        horizontal=True,
+        index=None
+    )
+
+    st.header("Cost structure")
+    st.write("Now that you have finished examining your company's strategic partners, the next topic is the cost structure.")
+
+    st.session_state.cost_intensive_components = st.multiselect(
+        "Please now select the three most cost-intensive components of your company:",
+        options=[
+            "Administration, finance and management/control",
+            "Building and maintaining customer relationships",
+            "Building and maintaining partnerships",
+            "Follow-up sales and service activities",
+            "Management and employee development",
+            "Inbound logistics",
+            "Outbound logistics",
+            "Marketing Department",
+            "Sales Department",
+            "Advising and solving clients' unique challenges",
+            "Procurement Department",
+            "Production Department",
+            "R&D (research and development)"
+        ],
+        max_selections=3,
+        help="Select up to three most cost-intensive components"
+    )
+
+    st.header("Team")
+    st.write("We now want to understand more about the team behind your company!")
+
+    st.write("Please describe the key people in your company, their positions, and core competencies.")
+    
+    # Initialize session state for team members if not exists
+    if 'team_members' not in st.session_state:
+        st.session_state.team_members = ""
+
+    # Simple text area for team members
+    st.session_state.team_members = st.text_area(
+        "Team Members",
+        value=st.session_state.team_members,
+        height=200,
+        placeholder="Please describe your team members, their positions, and core competencies..."
+    )
+
+    # Initialize session state for funding amount if not exists
+    if 'funding_amount' not in st.session_state:
+        st.session_state.funding_amount = None
+
+    # Create a number input field for the funding amount
+    st.session_state.funding_amount = st.text_input(
+        "If the business plan is used to apply for funding, please specify the amount, that you apply for (in Danish Kroner):",
+        placeholder="e.g., 1000000"
+    )
+
+    # Only show the funding purpose question if amount is given
+    if st.session_state.funding_amount:           
+        # Initialize session state for funding purpose if not exists
+        if 'funding_purpose' not in st.session_state:
+            st.session_state.funding_purpose = ""
+
+        # Create a text area for the funding purpose
+        st.session_state.funding_purpose = st.text_area(
+            "Please describe how you plan to use the requested funding:",
+            value=st.session_state.funding_purpose,
+            height=100
+        )
+
+    if st.button("Generate Business Plan"):
+        with st.spinner("🧠 Generating your business plan..."):
+            try:
+                data = {
+                    "business_name": st.session_state.business_name,
+                        "start_year": st.session_state.start_year,
+                        "business_reason": st.session_state.business_reason,
+                        "mission_vision": st.session_state.mission_vision,
+                        "legal_structure": st.session_state.legal_structure,
+                        "financial_funding": st.session_state.financial_funding,
+                        "business_sector": st.session_state.business_sector,
+                        "raw_materials_type": st.session_state.raw_materials_type,
+                        "industrial_business_type": st.session_state.industrial_business_type,
+                        "services_type": st.session_state.services_type,
+                        "durable_goods_type": st.session_state.durable_goods_type,
+                        "consumer_goods_type": st.session_state.consumer_goods_type,
+                        "healthcare_type": st.session_state.healthcare_type,
+                        "financial_sector_type": st.session_state.financial_sector_type,
+                        "it_sector_type": st.session_state.it_sector_type,
+                        "utilities_type": st.session_state.utilities_type,
+                        "culture_type": st.session_state.culture_type,
+                        "primary_countries": st.session_state.primary_countries,
+                        "product_centralisation": st.session_state.product_centralisation,
+                        "product_range": st.session_state.product_range,
+                        "end_consumer_characteristics": st.session_state.end_consumer_characteristics,
+                        "end_consumer_characteristics_2": st.session_state.end_consumer_characteristics_2,
+                        "product_service_description": st.session_state.product_service_description,
+                        "segment_name": st.session_state.segment_name,
+                        "segment_demographics": st.session_state.segment_demographics,
+                        "segment_characteristics": st.session_state.segment_characteristics,
+                        "customer_count": st.session_state.customer_count,
+                        "problems_faced": st.session_state.problems_faced,
+                        "biggest_competitors": st.session_state.biggest_competitors,
+                        "competition_intensity": st.session_state.competition_intensity,
+                        "price_comparison": st.session_state.price_comparison,
+                        "market_type": st.session_state.market_type,
+                        "competitive_parameters": st.session_state.competitive_parameters,
+                        "value_propositions": st.session_state.value_propositions,
+                        "direct_income": st.session_state.direct_income,
+                        "primary_revenue": st.session_state.primary_revenue,
+                        "one_time_payments": st.session_state.one_time_payments,
+                        "ongoing_payments": st.session_state.ongoing_payments,
+                        "payment_characteristics": st.session_state.payment_characteristics,
+                        "package_price": st.session_state.package_price,
+                        "price_negotiation": st.session_state.price_negotiation,
+                        "fixed_prices": st.session_state.fixed_prices,
+                        "dynamic_prices": st.session_state.dynamic_prices,
+                        "distribution_channels": st.session_state.distribution_channels,
+                        "purchasing_power": st.session_state.purchasing_power,
+                        "product_related_characteristics": st.session_state.product_related_characteristics,
+                        "self_service_availability": st.session_state.self_service_availability,
+                        "online_communities_presence": st.session_state.online_communities_presence,
+                        "development_process_customer_involvement": st.session_state.development_process_customer_involvement,
+                        "after_sale_purchases": st.session_state.after_sale_purchases,
+                        "personal_assistance_offered": st.session_state.personal_assistance_offered,
+                        "similar_products_switch": st.session_state.similar_products_switch,
+                        "general_customer_relation": st.session_state.general_customer_relation,
+                        "material_resources": st.session_state.material_resources,
+                        "intangible_resources": st.session_state.intangible_resources,
+                        "important_activities": st.session_state.important_activities,
+                        "inhouse_activities": st.session_state.inhouse_activities,
+                        "outsourced_activities": st.session_state.outsourced_activities,
+                        "company_statements": st.session_state.company_statements,
+                        "important_strategic_partners": st.session_state.important_strategic_partners,
+                        "partnership_benefits": st.session_state.partnership_benefits,
+                        "other_benefit": st.session_state.other_benefit,
+                        "company_dependency": st.session_state.company_dependency,
+                        "cost_intensive_components": st.session_state.cost_intensive_components,
+                        "team_members": st.session_state.team_members,
+                        "funding_amount": st.session_state.funding_amount,
+                        "funding_purpose": st.session_state.funding_purpose
+                }
+
+                st.write("🔄 Sending data for processing...")
+                #st.write(data)
+
+                response = requests.post(
+                    "http://localhost:8000/generate_business_plan",
+                    json=data
                 )
-            else:
-                st.error(f"Error: {response.text}")
-        except Exception as e:
-            st.error(f"Error connecting to the server: {str(e)}")
+
+                if response.status_code == 200:
+                    result = response.json()
+                    business_plan_markdown = result["business_plan"]  # Now a full string
+
+                    # Display full content in one go
+                    st.markdown(business_plan_markdown, unsafe_allow_html=True)
+
+                    st.success("✅ Business Plan ready!")
+
+                    st.download_button(
+                        label="Download Business Plan",
+                        data=business_plan_markdown,
+                        file_name="generated_business_plan.md",
+                        mime="text/markdown"
+                    )
+                else:
+                    st.error(f"Error: {response.text}")
+            except Exception as e:
+                st.error(f"Error connecting to the server: {str(e)}")
                 

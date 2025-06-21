@@ -75,8 +75,30 @@ class BusinessPlanRequest(BaseModel):
     similar_products_switch: str
     general_customer_relation: str
 
+    # Key resources
+    material_resources: List[str]
+    intangible_resources: List[str]
+    important_activities: List[str]
+    inhouse_activities: List[str]
+    outsourced_activities: Optional[List[str]] = []
+
+    # Company statements
+    company_statements: Optional[List[str]] = []
+    
+    # Important strategic partners
+    important_strategic_partners: List[str]
+    partnership_benefits: List[str]
+    other_benefit: Optional[str] = ""
+    company_dependency: str
+    cost_intensive_components: List[str]
+
+    # Team
+    team_members: str
+    funding_amount: str
+    funding_purpose: str
+
 class BusinessPlanResponse(BaseModel):
-    business_plan: List[str]
+    business_plan: str
 
 def collect_business_plan_inputs(request: BusinessPlanRequest) -> dict:
     """
@@ -149,7 +171,21 @@ def collect_business_plan_inputs(request: BusinessPlanRequest) -> dict:
         "after_sale_purchases": request.after_sale_purchases,
         "personal_assistance_offered": request.personal_assistance_offered,
         "similar_products_switch": request.similar_products_switch,
-        "general_customer_relation": request.general_customer_relation
+        "general_customer_relation": request.general_customer_relation,
+        "material_resources": safe_join(request.material_resources),
+        "intangible_resources": safe_join(request.intangible_resources),
+        "important_activities": safe_join(request.important_activities),
+        "inhouse_activities": safe_join(request.inhouse_activities),
+        "outsourced_activities": safe_join(request.outsourced_activities),
+        "company_statements": safe_join(request.company_statements),
+        "important_strategic_partners": safe_join(request.important_strategic_partners),
+        "partnership_benefits": safe_join(request.partnership_benefits),
+        "other_benefit": request.other_benefit,
+        "company_dependency": request.company_dependency,
+        "cost_intensive_components": safe_join(request.cost_intensive_components),
+        "team_members": request.team_members,
+        "funding_amount": request.funding_amount,
+        "funding_purpose": request.funding_purpose
     }
 
     return inputs
@@ -163,7 +199,20 @@ async def generate_business_plan(request: BusinessPlanRequest):
 
         flow = BusinessPlanFlow()
 
-        final_state = await flow.kickoff_async(initial_state.dict())
+        state_result = await flow.kickoff_async(initial_state.model_dump())
+
+        if isinstance(state_result, BaseModel):
+            state_dict = state_result.model_dump()
+        elif isinstance(state_result, dict):
+            state_dict = state_result
+        else:
+            raise ValueError("Flow result is not a dict or Pydantic model")
+
+        bp_value = state_dict.get("business_plan")
+        if isinstance(bp_value, dict) and "raw" in bp_value:
+            state_dict["business_plan"] = bp_value["raw"]
+
+        final_state = BusinessPlanState(**state_dict)
 
         return BusinessPlanResponse(business_plan=final_state.business_plan)
     
